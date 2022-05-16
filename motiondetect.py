@@ -95,11 +95,7 @@ class MotionDetect():
         # set frame rate for recording
         width, height, channels = frame.shape
         # return output object
-        return (
-            fileName,
-            filePath,
-            cv.VideoWriter(filePath, self.codec, self.fps, (height, width))
-            )
+        return fileName, filePath, cv.VideoWriter(filePath, self.codec, self.fps, (height, width))
 
     def rescaleFrame(self, frame):
         # scale the width and height, (cast to int)
@@ -114,9 +110,7 @@ class MotionDetect():
             if self.record:
                 if self.out is None:
                     date_time = datetime.now().strftime("%Y_%m_%d_%H:%M:%S")
-                    self.fileName,
-                    self.filePath,
-                    self.out = MotionDetect.setRecording(
+                    self.fileName, self.filePath, self.out = MotionDetect.setRecording(
                         self,
                         date_time,
                         frame
@@ -142,9 +136,7 @@ class MotionDetect():
                             )
                         )
                     date_time = datetime.now().strftime("%Y_%m_%d_%H:%M:%S")
-                    self.fileName,
-                    self.filePath,
-                    self.out = MotionDetect.setRecording(
+                    self.fileName, self.filePath, self.out = MotionDetect.setRecording(
                         self,
                         date_time,
                         frame
@@ -263,6 +255,7 @@ class MotionDetect():
                         )
                         text = self.motionText[int(time.time()) % 4]
             frame = MotionDetect.setShowText(self, frame, text)
+            cv.imshow('Video', frame)
             MotionDetect.actions(self, frame)
         connection.close()
         MotionDetect.cleanUp(self)
