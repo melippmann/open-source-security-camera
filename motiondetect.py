@@ -255,7 +255,8 @@ class MotionDetect():
                         )
                         text = self.motionText[int(time.time()) % 4]
             frame = MotionDetect.setShowText(self, frame, text)
-            cv.imshow('Video', frame)
+            # below is a debug line, it is used very comonly so we are leaving it in until debugging methods are created
+            # cv.imshow('Video', frame)
             MotionDetect.actions(self, frame)
         connection.close()
         MotionDetect.cleanUp(self)
